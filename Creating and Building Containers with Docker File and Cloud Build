@@ -1,0 +1,45 @@
+Building Containers with Docker File and Cloud Build
+--nano quickstart.sh
+
+Add the following lines in to the quickstart.sh file:
+
+--#!/bin/sh
+--echo "Hello, world! The time is $(date)."
+Save the file and close nano.
+
+Create an empty Dockerfile file using the nano text editor.
+--nano Dockerfile
+
+Add the following Dockerfile command to the end of the Dockerfile:
+--COPY quickstart.sh /
+
+Add the following Dockerfile command to the end of the Dockerfile:
+--CMD ["/quickstart.sh"]
+
+
+In run the following command to make the quickstart.sh script executable.
+--chmod +x quickstart.sh
+In Cloud Shell, run the following command to build the Docker container image in Cloud Build.
+gcloud builds submit --tag gcr.io/${GOOGLE_CLOUD_PROJECT}/quickstart-image .
+
+In enter the following command.
+--git clone https://github.com/GoogleCloudPlatformTraining/training-data-analyst
+--cd ~/training-data-analyst/courses/ak8s/02_Cloud_Build/a
+
+In Cloud Shell, execute the following command to view the contents of cloudbuild.yaml.
+--cat cloudbuild.yaml
+
+execute the following command to start a Cloud Build using cloudbuild.yaml as the build configuration file:
+--gcloud builds submit --config cloudbuild.yaml .
+
+In Cloud Shell, change to the directory that contains the sample files for this lab.
+--cd ~/training-data-analyst/courses/ak8s/02_Cloud_Build/b
+
+execute the following command to view the contents of cloudbuild.yaml.
+--cat cloudbuild.yaml
+
+execute the following command to start a Cloud Build using cloudbuild.yaml as the build configuration file:
+--gcloud builds submit --config cloudbuild.yaml .
+
+echo $?
+The command will reply with a non-zero value. If you had embedded this build in a script, your script would be able to act up on the build's failure.
